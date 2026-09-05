@@ -1,258 +1,72 @@
-# Awin-UKS Organizational Governance and Role-Binding Plan
+# AI Company Organization Foundation — Governance & Binding Plan
 
 **Date:** 2026-09-05  
-**Repository:** `huanchen1107/_Awin_Unified_Knowledge_System_Awin-UKS_`  
-**Planning Source:** ChatGPT architecture discussion  
-**Status:** Initial architecture plan  
+**Status:** Canonical planning input for Change 001  
+**Repository:** `huanchen1107/_Awin_Unified_Knowledge_System_Awin-UKS_`
 
----
+## 1. Purpose
 
-## 1. Vision
+This document defines the **organizational foundation** of the Awin AI Company. It answers who exists, who occupies each position, who reports to whom, what authority is attached to a position, and how identities/runtimes can change without breaking the organization.
 
-Awin-UKS is designed as an AI-driven organizational operating model rather than only a search or RAG application.
+It deliberately does **not** define mission execution, UKS retrieval, RAG, connectors, or UI implementation.
 
-The system separates:
-
-- organizational positions,
-- named identities,
-- AI agents,
-- runtime/model providers,
-- systems and platforms,
-- authority and delegation,
-- and historical bindings between them.
-
-The key principle is:
-
-> **Position ≠ Role ≠ Identity ≠ Agent ≠ Runtime ≠ System**
-
-This separation allows people, AI agents, models, and tools to be replaced without changing the organizational structure or workflow.
-
----
-
-## 2. Initial Executive Organization
-
-Initial binding:
+## 2. Canonical organization
 
 ```text
 Chairman / 董事長
-└── Chairman Identity: User / Owner
-
-CEO / 執行長
-└── Identity: Awin
-
-CIO / 資訊長
-└── Identity: UKS
-```
-
-The initial command chain is:
-
-```text
-Chairman
-   │
-   ▼
+        │
+        ▼
 CEO — Awin
-   │
-   ▼
-CIO — UKS
+        │
+        ├───────────────┬───────────────┐
+        ▼               ▼               ▼
+CIO — Pick            CTO             Other CXO
+        │            [future]          [future]
+        ▼
+UKS — Unified Knowledge System
 ```
 
-The Chairman determines strategic intent.
-
-Awin, as CEO, interprets Chairman intent, coordinates executive roles, delegates work, resolves cross-department responsibilities, and returns an executive-level result.
-
-UKS, as CIO, is responsible for information governance, retrieval, knowledge routing, indexing, provenance, citations, source authority, and access to knowledge systems.
-
----
-
-## 3. Important Naming Separation
-
-`UKS` is currently bound as the **CIO identity**.
-
-To avoid ambiguity between the CIO identity and the underlying software platform, the technical information platform should use a separate internal name.
-
-Recommended internal platform name:
+Canonical naming:
 
 ```text
-UKP = Unified Knowledge Platform
+Awin = CEO identity
+Pick = CIO identity
+UKS  = Unified Knowledge System
 ```
 
-Therefore:
+UKS is a **System**, not an Identity.
 
-```text
-UKS = CIO Identity
-UKP = Knowledge Platform / Infrastructure
-```
+## 3. Fundamental domain separation
 
-Example:
+> **Position ≠ Role ≠ Identity ≠ Agent ≠ Runtime ≠ System**
 
-```text
-CIO — UKS
-   │
-   └── manages
-       │
-       ▼
-Unified Knowledge Platform (UKP)
-       ├── GitHub
-       ├── Notion
-       ├── Google Drive
-       ├── NotebookLM
-       ├── Search Index
-       ├── Metadata Registry
-       ├── Citation / Provenance
-       └── MCP / Tool Gateway
-```
+### Organization
+The company/governance container.
 
-This naming may be changed later through configuration without modifying the core architecture.
+### Position
+A stable organizational office such as Chairman, CEO, CIO, CTO, CSO, CRO, or Chief of Staff.
 
----
+### Role
+A reusable responsibility/capability profile such as Executive Coordination, Knowledge Governance, Architecture, Builder, Reviewer, or Research.
 
-## 4. Core Domain Model
+### Identity
+A named human, AI identity, team, service, or automation that may be bound to a position or role.
 
-The system shall model the following entities independently.
+### Agent
+A software execution component acting for a role/identity.
 
-### 4.1 Organization
+### Runtime
+The current model/provider/runtime used by an agent, such as Codex, Claude, Gemini, GPT, or a local model.
 
-Represents the company or organizational container.
+### System
+A technical platform operated by the organization, such as UKS.
 
-Possible attributes:
-
-```yaml
-organization:
-  id: awin-org
-  name: Awin Organization
-  owner_position: chairman
-```
-
----
-
-### 4.2 Position
-
-A Position is an organizational office that exists independently from whoever currently occupies it.
-
-Examples:
-
-- Chairman
-- CEO
-- CIO
-- CTO
-- CFO
-- COO
-- CSO
-- CRO
-- Chief of Staff
-- Engineering Director
-- Research Director
-- Security Director
-
-Example:
-
-```yaml
-position:
-  id: cio
-  title: Chief Information Officer
-  display_name_zh: 資訊長
-  rank: 80
-  reports_to: ceo
-```
-
-A Position defines organizational authority and reporting structure.
-
-It MUST NOT directly encode a specific human, AI model, or vendor.
-
----
-
-### 4.3 Role
-
-A Role defines a reusable responsibility or capability profile.
-
-Examples:
-
-```text
-Knowledge Governance
-Executive Coordination
-Software Architecture
-Implementation
-Code Review
-Security Review
-Research
-Teaching
-Document Management
-```
-
-A position may have multiple roles.
-
-Example:
-
-```yaml
-position_roles:
-  cio:
-    - knowledge_governance
-    - information_architecture
-    - retrieval_management
-    - source_authority_management
-```
-
----
-
-## 5. Identity Registry
-
-Identity represents *who or what* is occupying a position or executing a role.
-
-Identity types may include:
-
-```text
-Human
-AI Agent
-Service
-Automation
-Team
-External Provider
-```
-
-Example:
-
-```yaml
-identities:
-  chairman_owner:
-    type: human
-    display_name: Chairman
-
-  awin:
-    type: ai_agent
-    display_name: Awin
-
-  uks:
-    type: ai_agent
-    display_name: UKS
-```
-
-An identity is independent from a position.
-
-Therefore Awin does not inherently equal CEO.
-
-Instead:
-
-```text
-CEO Position
-    │
-    └── Binding
-            │
-            ▼
-          Awin
-```
-
----
-
-## 6. Position–Identity Binding
-
-Bindings determine who currently occupies each position.
-
-Initial binding:
+## 4. Initial position–identity bindings
 
 ```yaml
 bindings:
   - position_id: chairman
-    identity_id: chairman_owner
+    identity_id: owner
     effective_from: 2026-09-05
 
   - position_id: ceo
@@ -260,422 +74,170 @@ bindings:
     effective_from: 2026-09-05
 
   - position_id: cio
-    identity_id: uks
+    identity_id: pick
     effective_from: 2026-09-05
 ```
 
-This makes bindings replaceable.
+These are bindings, not permanent equivalences.
 
-For example, in the future:
+Future examples:
 
 ```text
-CEO → Alice
+CEO → another identity
 Chief of Staff → Awin
-CIO → Atlas
+CIO → another identity
 ```
 
-No organizational workflow needs to be rewritten.
+The company structure should continue to function after rebinding.
 
-Only the binding changes.
+## 5. Reporting structure
 
----
+Initial reporting chain:
 
-## 7. Historical Binding
+```text
+Chairman
+   ↓
+CEO
+   ↓
+CIO / CTO / other executives
+```
 
-Bindings MUST be temporal and auditable.
+Reporting relationships belong to **Positions**, not to AI provider names.
 
-Do not overwrite old bindings.
+## 6. Position-based invocation
 
-Recommended structure:
+The Chairman should be able to communicate using organizational titles.
+
+Example:
+
+```text
+「叫資訊長查一下。」
+      ↓
+Position Registry: CIO
+      ↓
+Binding Registry: Pick
+      ↓
+current authorized agent/runtime
+```
+
+The Chairman should not need to know whether Pick is currently powered by Claude, Gemini, GPT, or another runtime.
+
+## 7. Role model
+
+Roles are reusable capability profiles and should not be confused with positions.
+
+Examples:
+
+```text
+Executive Coordination
+Knowledge Governance
+Software Architecture
+Implementation
+Review
+Security Review
+Research
+Teaching
+Operations
+```
+
+A Position may carry multiple Roles; a Role may be fulfilled by different identities/agents over time.
+
+## 8. Runtime separation and failover
+
+Runtime/provider details are not organizational identity.
+
+Example:
+
+```text
+Position : CIO
+Identity : Pick
+Agent    : CIO Executive Agent
+Runtime  : Claude
+```
+
+may later become:
+
+```text
+Position : CIO
+Identity : Pick
+Agent    : CIO Executive Agent
+Runtime  : Gemini
+```
+
+Pick remains Pick.
+
+Runtime selection/fallback is implemented later in Change 003, but Change 001 must preserve the abstraction boundary.
+
+## 9. Authority model
+
+Authority belongs primarily to **Positions + Policies**.
+
+Examples:
 
 ```yaml
-binding:
-  id: binding-0003
+ceo:
+  may:
+    - interpret_chairman_intent
+    - coordinate_executives
+    - delegate_within_policy
+    - resolve_cross-domain ownership
+  may_not_without_chairman:
+    - rewrite_company_governance
+
+cio:
+  may:
+    - govern_information_domain
+    - manage_systems_assigned_to_cio
+    - delegate_information work within policy
+```
+
+A runtime does not gain authority merely because it can technically perform an action.
+
+## 10. Delegation boundary
+
+Change 001 defines **who may delegate to whom** at an organizational-policy level.
+
+The detailed runtime work object — Mission, Workstream, Task, Delegation Contract, Evidence, Approval, Escalation — belongs to **Change 002**.
+
+Therefore Change 001 may define:
+
+```text
+Chairman may delegate to CEO
+CEO may delegate to executives
+CIO may delegate within its authorized domain
+```
+
+but it should not yet implement Mission orchestration.
+
+## 11. Historical binding and audit
+
+Bindings must be temporal and auditable.
+
+```yaml
+binding_event:
+  id: bind-evt-001
   position_id: cio
-  identity_id: uks
+  identity_id: pick
   effective_from: 2026-09-05T00:00:00+08:00
   effective_to: null
   status: active
-  changed_by: chairman
+  changed_by_position: chairman
 ```
 
-When replaced:
+When a binding changes:
 
 ```text
 old binding → closed
 new binding → active
 ```
 
-This makes it possible to answer questions such as:
+This enables historical questions such as:
 
-> Who was CIO when this decision was made?
+- Who was CIO when this decision was made?
+- Which identity acted under CEO authority?
+- Which runtime executed the task at that time?
 
-or:
-
-> Which AI agent generated this artifact under which organizational authority?
-
----
-
-## 8. Runtime Binding
-
-AI identity and AI runtime must also be separated.
-
-Example:
-
-```text
-Identity: UKS
-Position: CIO
-Runtime: Claude
-```
-
-Later:
-
-```text
-Identity: UKS
-Position: CIO
-Runtime: Gemini
-```
-
-UKS remains the same organizational identity even when the underlying LLM changes.
-
-Recommended model:
-
-```yaml
-agent_runtime_binding:
-  identity_id: uks
-  provider: anthropic
-  model: claude
-  status: active
-```
-
-Possible providers:
-
-```text
-OpenAI
-Gemini
-Claude
-Local LLM
-Specialized Agent
-```
-
-This is important for token/quota resilience.
-
----
-
-## 9. Provider Failover
-
-A runtime provider must not be treated as a permanent organizational identity.
-
-Example:
-
-```text
-Builder Role
-   │
-   ├── preferred runtime → Codex
-   ├── fallback → Claude
-   └── fallback → Gemini
-```
-
-If Codex quota is exhausted:
-
-```text
-Role remains Builder
-Position remains unchanged
-Task context remains unchanged
-Runtime binding changes
-```
-
-The replacement agent resumes from durable artifacts rather than previous chat history.
-
-Recommended durable handoff sources:
-
-- OpenSpec artifacts
-- Git repository state
-- design.md
-- AGENTS.md
-- tasks.md
-- test results
-- generated artifacts
-- audit/event log
-
----
-
-## 10. Authority Model
-
-Authority belongs primarily to Positions and Policies, not model providers.
-
-Example CEO authority:
-
-```yaml
-position: ceo
-
-responsibilities:
-  - interpret_chairman_intent
-  - coordinate_executives
-  - delegate_tasks
-  - resolve_cross_department_conflicts
-  - synthesize_executive_results
-
-authority:
-  can_delegate: true
-  can_query_executives: true
-  can_modify_governance: false
-  governance_change_requires: chairman
-```
-
-Example CIO authority:
-
-```yaml
-position: cio
-
-responsibilities:
-  - knowledge_governance
-  - information_retrieval
-  - knowledge_index_management
-  - metadata_management
-  - source_provenance
-  - citation_management
-  - source_authority_resolution
-
-authority:
-  allowed_systems:
-    - github
-    - notion
-    - google_drive
-    - notebooklm
-    - unified_knowledge_platform
-```
-
----
-
-## 11. Delegation Model
-
-Delegation should follow Position → Position whenever possible.
-
-Example:
-
-```text
-Chairman
-   │ strategic instruction
-   ▼
-CEO — Awin
-   │ delegated information task
-   ▼
-CIO — UKS
-   │
-   ├── GitHub Search
-   ├── Notion Search
-   ├── Google Drive Search
-   ├── NotebookLM Research
-   └── Knowledge Index
-```
-
-The CIO returns evidence and information analysis to the CEO.
-
-The CEO produces the final executive response for the Chairman.
-
----
-
-## 12. Position-Based Invocation
-
-Users should be allowed to issue commands using titles instead of names.
-
-Example:
-
-> 叫資訊長查一下 Lesson 3 的所有資料。
-
-Resolution:
-
-```text
-"資訊長"
-   ↓
-Position Registry
-   ↓
-CIO
-   ↓
-Binding Registry
-   ↓
-UKS
-   ↓
-Invoke UKS Agent
-```
-
-Similarly:
-
-> 叫技術長處理這個 bug。
-
-may resolve to:
-
-```text
-CTO Position
-   ↓
-Current Identity Binding
-   ↓
-Current Runtime
-```
-
-No hard-coded agent name should be required.
-
----
-
-## 13. Proposed Future Executive Structure
-
-The architecture should allow the organization to grow into:
-
-```text
-Chairman
-│
-└── CEO — Awin
-     │
-     ├── CIO — UKS
-     │    ├── Knowledge Search Manager
-     │    ├── Archive Manager
-     │    ├── Metadata Manager
-     │    └── Research Information Manager
-     │
-     ├── CTO — future binding
-     │    ├── Architect
-     │    ├── Builder
-     │    ├── Reviewer
-     │    └── DevOps
-     │
-     ├── CSO — future binding
-     │    ├── Security Architect
-     │    ├── Red Team
-     │    └── Blue Team
-     │
-     ├── CRO — future binding
-     │    ├── Research Agent
-     │    └── Teaching Agent
-     │
-     └── Chief of Staff — future binding
-```
-
-The names and agents occupying these positions remain configurable.
-
----
-
-## 14. UKS / CIO Responsibilities
-
-As initial CIO, UKS should manage the future Unified Knowledge Platform.
-
-Primary source systems:
-
-```text
-GitHub
-Notion
-Google Drive
-NotebookLM
-```
-
-Potential future sources:
-
-```text
-Gmail
-Google Calendar
-Slack
-Local Files
-Web Sources
-Databases
-Vector Stores
-PDF Libraries
-Research Repositories
-```
-
-UKS should provide:
-
-- source discovery,
-- connector management,
-- project recognition,
-- metadata normalization,
-- hybrid retrieval,
-- semantic retrieval,
-- full-text retrieval,
-- source ranking,
-- freshness ranking,
-- authority ranking,
-- provenance,
-- citations,
-- conflict detection,
-- duplicate detection,
-- deep research routing.
-
----
-
-## 15. Source Authority Engine
-
-Not all sources should be trusted equally.
-
-An Authority Engine should determine which evidence takes precedence.
-
-Initial conceptual priorities may look like:
-
-```text
-Canonical GitHub design/spec          100
-Canonical source code                 95
-Official project documentation        90
-Official Google Drive document        80
-Final Notion documentation            80
-NotebookLM source-backed synthesis    60
-Working note                          40
-AI-generated summary                  20
-```
-
-These values are policy examples, not immutable constants.
-
-The ranking should consider:
-
-- project,
-- artifact type,
-- canonical status,
-- source type,
-- freshness,
-- author,
-- version,
-- approval status,
-- superseding relationships.
-
----
-
-## 16. Knowledge Query Flow
-
-Example Chairman request:
-
-> Awin，找出 AI Cybersecurity Lesson 3 的所有內容並整理目前狀態。
-
-Proposed flow:
-
-```text
-Chairman
-   ↓
-CEO Awin
-   ↓
-Intent Classification
-   ↓
-Delegate information request
-   ↓
-CIO UKS
-   ↓
-Knowledge Router
-   ├── GitHub
-   ├── Notion
-   ├── Drive
-   └── NotebookLM
-   ↓
-Authority + Freshness + Provenance
-   ↓
-Evidence Package
-   ↓
-CEO Awin
-   ↓
-Executive Synthesis
-   ↓
-Chairman
-```
-
----
-
-## 17. Recommended Registry Architecture
+## 12. Proposed bootstrap registry
 
 ```text
 organization/
@@ -683,209 +245,87 @@ organization/
 │   ├── chairman.yaml
 │   ├── ceo.yaml
 │   └── cio.yaml
-│
 ├── roles/
 │   ├── executive_coordination.yaml
 │   └── knowledge_governance.yaml
-│
 ├── identities/
-│   ├── chairman.yaml
+│   ├── owner.yaml
 │   ├── awin.yaml
-│   └── uks.yaml
-│
+│   └── pick.yaml
 ├── bindings/
-│   ├── position_bindings.yaml
-│   └── runtime_bindings.yaml
-│
+│   └── position_bindings.yaml
 ├── policies/
 │   ├── authority.yaml
-│   ├── delegation.yaml
-│   └── source_authority.yaml
-│
+│   └── delegation.yaml
 └── history/
     └── binding_events.jsonl
 ```
 
-A database-backed registry may later replace or supplement these files.
+A database may later supplement these files. Human-readable configuration remains useful as bootstrap and governance evidence.
 
-Configuration files remain valuable as bootstrap and human-readable governance contracts.
+## 13. Change 001 scope
 
----
-
-## 18. Core Technical Principle
-
-The following six concepts must remain separate:
+### In scope
 
 ```text
-POSITION
-What organizational office exists?
-
-ROLE
-What responsibility/capability is required?
-
-IDENTITY
-Who or what currently represents the actor?
-
-AGENT
-What autonomous software component performs actions?
-
-RUNTIME
-Which model/provider currently powers that agent?
-
-SYSTEM
-Which technical platform/resource is being operated?
+Organization
+Department abstraction
+Position
+Role
+Identity
+Position–Identity Binding
+Reporting Line
+Authority Policy
+Delegation Policy boundary
+Historical Binding
+Audit foundation
+Runtime-binding abstraction only as a portability contract
 ```
 
-Example:
+### Out of scope
 
 ```text
-Position: CIO
-Role: Knowledge Governance
-Identity: UKS
-Agent: UKS Executive Agent
-Runtime: Claude / Gemini / GPT / Local
-System: Unified Knowledge Platform
+Mission / Workstream / Task execution
+Delegation Contract lifecycle
+Evidence / Review / Approval / Escalation workflow
+Provider selection and quota failover implementation
+UKS connectors / RAG / indexing / retrieval
+NotebookLM integration
+CEO autonomous orchestration
+Control Center UI
 ```
 
----
-
-## 19. Auditability
-
-Every meaningful delegated action should eventually be traceable.
-
-Recommended event record:
-
-```yaml
-event_id: evt-...
-timestamp: ...
-organization_id: awin-org
-initiator_position: chairman
-initiator_identity: chairman_owner
-delegated_to_position: ceo
-delegated_to_identity: awin
-subdelegated_to_position: cio
-subdelegated_to_identity: uks
-action: knowledge_query
-systems_used:
-  - github
-  - google_drive
-result_artifact: ...
-```
-
-This supports:
-
-- accountability,
-- reproducibility,
-- debugging,
-- agent handoff,
-- historical reconstruction,
-- future governance controls.
-
----
-
-## 20. OpenSpec Roadmap
-
-Recommended sequence:
-
-### Change 001 — Organizational Governance and Role Binding
+## 14. Change dependency
 
 ```text
-001-organizational-governance-and-role-binding
+001 Organization Foundation
+        ↓
+002 Mission & Company Orchestration
+        ↓
+003 Agent Runtime & Execution Fabric
+        ↓
+004 UKS
+        ↓
+005 Awin CEO Orchestrator
+        ↓
+006 AI Company Control Center
 ```
 
-Define:
+## 15. Acceptance intent for Change 001
 
-- Organization Registry
-- Position Registry
-- Role Registry
-- Identity Registry
-- Position–Identity Binding
-- Runtime Binding
-- Delegation Policy
-- Authority Policy
-- Historical Binding
-- Audit Event Model
-
-This change should establish the governance foundation before implementing RAG or connectors.
-
-### Change 002 — Unified Knowledge Connectors
-
-Connect:
-
-- GitHub
-- Notion
-- Google Drive
-- NotebookLM
-
-### Change 003 — Knowledge Catalog and Hybrid Search
-
-Implement:
-
-- metadata registry,
-- document catalog,
-- keyword index,
-- vector index,
-- source normalization,
-- project classification.
-
-### Change 004 — Knowledge Query Router
-
-Implement:
-
-- intent routing,
-- project routing,
-- source routing,
-- authority-aware retrieval,
-- freshness-aware retrieval.
-
-### Change 005 — NotebookLM Research Layer
-
-Use NotebookLM as deep-reader / research capability rather than canonical storage.
-
-### Change 006 — Awin Executive Orchestration
-
-Implement the Chairman → CEO → Executive delegation workflow.
-
----
-
-## 21. Initial Decisions
-
-The following architecture decisions are accepted as the current planning baseline:
-
-1. The user is initially bound to the Chairman position.
-2. Awin is initially bound to the CEO position.
-3. UKS is initially bound to the CIO position.
-4. These bindings are configurable and replaceable.
-5. Organizational positions must not depend on a specific AI provider.
-6. AI identities must not depend on a specific LLM runtime.
-7. Runtime/provider failover must preserve identity and role continuity.
-8. Historical bindings must be retained.
-9. Authority belongs to organizational positions/policies, not vendors/models.
-10. Delegation should primarily be position-based.
-11. The CIO manages knowledge infrastructure and knowledge governance.
-12. GitHub, Notion, Google Drive, and NotebookLM remain independent sources rather than mutually overwriting stores.
-13. Canonical source authority and provenance must be explicitly modeled.
-14. Durable project artifacts, not chat history, should enable agent handoff.
-15. The knowledge platform must be distinct from the UKS CIO identity at the implementation level.
-
----
-
-## 22. Desired End State
-
-The system should eventually allow the Chairman to communicate naturally at the organizational level:
+After Change 001 the system should be able to model and answer:
 
 ```text
-「Awin，請資訊長把 Lesson 3 的資料找齊。」
-
-「Awin，請技術長接手 Change 021。」
-
-「資訊長，這份說明的 canonical source 在哪裡？」
-
-「把 Builder 從 Codex 換成 Claude，繼續原本工作。」
+Who is CEO? → Awin
+Who is CIO? → Pick
+Who does CIO report to? → CEO
+What authority belongs to CIO? → resolve policy
+Can CIO identity be replaced? → yes, via binding change
+Was Pick CIO on a historical date? → resolve binding history
 ```
 
-The platform resolves titles, identities, runtime providers, permissions, systems, evidence, and delegation automatically.
+It should **not yet** be expected to execute a full Mission or search UKS.
 
-The long-term objective is not merely an AI chatbot.
+## 16. Planning rule
 
-It is an **AI-governed organizational knowledge and execution system** with durable roles, replaceable agents, explicit authority, traceable delegation, and unified knowledge access.
+> **Change 001 builds the company structure. Change 002 teaches the company how to work. Change 004 builds the UKS information system operated by the company.**
