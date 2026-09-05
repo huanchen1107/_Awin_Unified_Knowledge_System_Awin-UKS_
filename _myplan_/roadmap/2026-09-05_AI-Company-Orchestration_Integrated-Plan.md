@@ -1,30 +1,24 @@
-# AI Company Orchestration — Integrated Planning Baseline
+# AI Company Orchestration — Canonical Integrated Roadmap
 
 **Date:** 2026-09-05  
-**Repository:** `huanchen1107/_Awin_Unified_Knowledge_System_Awin-UKS_`  
-**Status:** Planning baseline  
-**Scope:** Company operating model and orchestration roadmap before UKS implementation
+**Status:** Canonical planning baseline  
+**Repository:** `huanchen1107/_Awin_Unified_Knowledge_System_Awin-UKS_`
 
----
+## 1. Strategic direction
 
-## 1. Strategic Direction
-
-The project is not merely a collection of agents. It is an **AI Company** with organizational structure, executive responsibility, delegated missions, durable execution state, review, escalation, and governance.
-
-The Chairman should operate the company through goals and decisions rather than by manually selecting individual model providers or worker agents.
+This project is an **AI Company operating model**, not merely an agent framework, chatbot, or RAG application.
 
 Core principle:
 
 > **The Chairman manages an AI Company; the Chairman does not directly manage model runtimes.**
 
----
+The company must support durable missions, explicit delegation, evidence-backed execution, review, escalation, policy-based approval, provider/runtime replacement, and auditable handoff.
 
-## 2. Current Canonical Organization
+## 2. Canonical organization
 
 ```text
 Chairman / 董事長
-        │
-        │ Goals / Decisions
+        │ Goals / Decisions / Approval
         ▼
 CEO — Awin
         │
@@ -39,29 +33,14 @@ UKS — Unified Knowledge System
 Canonical naming:
 
 ```text
-Awin = CEO Identity
-Pick = CIO Identity
+Awin = CEO identity
+Pick = CIO identity
 UKS  = Unified Knowledge System
 ```
 
-The relationship is binding-based rather than hard-coded.
-
----
-
-## 3. Fundamental Domain Separation
-
-The organization must preserve the invariant:
+## 3. Fundamental invariant
 
 > **Position ≠ Role ≠ Identity ≠ Agent ≠ Runtime ≠ System**
-
-Definitions:
-
-- **Position** — organizational office, such as Chairman, CEO, CIO, CTO.
-- **Role** — reusable responsibility/capability profile.
-- **Identity** — named actor, human or AI, currently bound to a position or role.
-- **Agent** — software execution component acting for an identity/role.
-- **Runtime** — model/provider/runtime such as Codex, Claude, Gemini, GPT, or local model.
-- **System** — technical platform or resource such as UKS.
 
 Example:
 
@@ -69,130 +48,110 @@ Example:
 Position : CIO
 Identity : Pick
 Role     : Information Executive
+Agent    : CIO Executive Agent
+Runtime  : replaceable
 System   : UKS
-Runtime  : interchangeable
 ```
 
----
+This separation is required for governance, failover, portability, historical audit, and organizational continuity.
 
-## 4. Company Operating Model
+## 4. Company operating loop
 
-The preferred company lifecycle is:
+The durable business work unit is a **Mission**, not a chat prompt.
 
 ```text
 Chairman Intent
       ↓
 Mission
       ↓
-CEO Understands
-      ↓
-Plan / Decompose
+CEO Understand / Plan
       ↓
 Assign Executive Owner
       ↓
-Delegation
+Delegation Contract
       ↓
-Execution
+Workstream / Task Execution
       ↓
 Artifacts + Evidence
       ↓
 Review
-      ↓
-Pass OR Escalation
-      ↓
-CEO Synthesis
-      ↓
-Chairman
+   ┌──┴─────────────┐
+   ↓                ↓
+ PASS          REWORK / PROBLEM
+   │                │
+   │          Escalation if needed
+   └────────┬───────┘
+            ↓
+       CEO Synthesis
+            ↓
+        Chairman
 ```
 
-Awin, as CEO, should not automatically execute every task directly. Awin should interpret the Chairman's intent, establish a mission, determine ownership, delegate work, monitor progress, handle escalation, and return an executive synthesis.
+Awin should not automatically do every task. As CEO, Awin should interpret intent, establish/shape Missions, choose ownership, delegate, monitor, coordinate, handle escalation, and return an executive synthesis.
 
----
+## 5. Durable Mission model
 
-## 5. Mission as the Primary Work Unit
-
-A user prompt is not the durable company work unit. The durable unit should be a **Mission**.
-
-Example conceptual model:
-
-```yaml
-mission:
-  id: M-2026-001
-  requested_by:
-    position: chairman
-  owner:
-    position: ceo
-  goal: "Complete Lesson 3 AI Red Team curriculum"
-  status: active
-  success_criteria:
-    - curriculum complete
-    - labs complete
-    - slides complete
-    - instructor notes complete
-    - security boundaries documented
-```
-
-A Mission may contain:
+Conceptual structure:
 
 ```text
 Mission
- ├── Workstream
- │    ├── Task
- │    ├── Task
- │    └── Task
- ├── Workstream
- │    └── Task
- └── Deliverables
+├── Workstream
+│   ├── Task
+│   ├── Task
+│   └── Task
+├── Workstream
+│   └── Task
+├── Deliverables
+├── Evidence
+├── Reviews
+├── Approvals
+└── Audit Events
 ```
 
-The mission should survive agent, model, runtime, and conversation changes.
+A Mission must survive changes in:
 
----
+```text
+conversation
+agent
+runtime
+provider
+machine/device
+```
 
-## 6. Delegation Contract
+## 6. Delegation contract
 
-Delegation should be explicit and auditable rather than equivalent to casually invoking another agent.
+Delegation is an explicit company object, not a casual agent call.
 
 Example:
 
 ```yaml
 delegation:
-  from: CEO
-  to: CIO
-  mission: M-2026-001
-  objective: "Find all existing Lesson 1–3 materials"
-  expected_output: "Evidence Package"
+  mission_id: M-2026-001
+  from_position: ceo
+  to_position: cio
+  objective: "Find existing Lesson 1–3 materials"
+  expected_output: evidence_package
   authority:
-    read_sources: true
-    modify_sources: false
-  return_to: CEO
+    read: true
+    modify: false
+  return_to_position: ceo
 ```
 
-Conceptual flow:
+Resolution occurs at execution time:
 
 ```text
-Awin / CEO
-   ↓
-Delegation Contract
-   ↓
-Pick / CIO
-   ↓
-Execution
-   ↓
-Evidence / Artifact
-   ↓
-Return to CEO
+Target Position
+      ↓
+Position–Identity Binding
+      ↓
+Role / Agent Resolution
+      ↓
+Runtime Resolution
 ```
 
-Delegation should normally occur between organizational positions, with the current identity binding resolved at execution time.
+## 7. Runtime independence
 
----
-
-## 7. Runtime and Provider Separation
-
-Model vendors/providers are execution resources rather than organizational offices.
-
-The preferred execution chain is:
+Runtime/provider belongs below the organization.
 
 ```text
 Position
@@ -205,12 +164,10 @@ Agent
    ↓
 Runtime Resolver
    ↓
-Codex / Claude / Gemini / GPT / Local Model
+Codex / Claude / Gemini / GPT / Local
 ```
 
-If one runtime becomes unavailable or reaches quota limits, the task should continue through another runtime without redefining the position, identity, mission, or delegated responsibility.
-
-Example:
+Example failover:
 
 ```text
 Builder Role
@@ -219,13 +176,13 @@ Builder Role
 └── fallback  → Gemini
 ```
 
----
+Provider failure or quota exhaustion must not change Mission ownership, organizational authority, or identity.
 
-## 8. Durable Handoff and OpenSpec
+## 8. Durable handoff and OpenSpec
 
-Company work must not depend on prior chat history as its canonical state.
+Company work must not depend on previous chat history as canonical state.
 
-Preferred durable handoff sources include:
+Preferred durable state:
 
 ```text
 Mission state
@@ -234,199 +191,89 @@ proposal.md
 design.md
 specs/
 tasks.md
-Git working tree
-commits
+Git working tree / commits
 source code
 tests
 artifacts
-audit/event logs
+evidence
+audit/event log
 ```
 
-Core principle:
+Core rule:
 
 > **OpenSpec Change owns durable implementation state; agents execute and advance that state.**
 
-A runtime change should look like:
+A replacement agent/runtime resumes by reading durable state and validating current repository/test evidence.
+
+## 9. Evidence and review
+
+Execution should return more than a result.
 
 ```text
-Codex quota exhausted
-        ↓
-Read canonical artifacts
-        ↓
-Claude continues
-        ↓
-State persists
-        ↓
-Gemini may continue later
-```
-
-No agent should require the entire prior conversation in order to resume safely.
-
----
-
-## 9. Review and Evidence
-
-Execution should produce not only a result but also evidence.
-
-Conceptual package:
-
-```text
-Task Result
-   +
-Artifact
-   +
-Evidence
-   +
-Validation
-   ↓
-Review
+Result
+ + Artifact
+ + Evidence
+ + Validation
+      ↓
+    Review
 ```
 
 Evidence may include:
 
-- commit SHA
-- test results
-- source references
-- generated files
-- diffs
-- screenshots
-- validation output
-- provenance records
+- commit SHA;
+- test results;
+- source references;
+- diff;
+- generated artifact;
+- validation output;
+- provenance records;
+- screenshot or runtime evidence where appropriate.
 
-The Reviewer should evaluate the artifact against mission/task acceptance criteria rather than simply accepting an agent's self-report.
+Review should compare artifacts against acceptance criteria, not merely trust the executor's self-report.
 
----
+## 10. Approval and escalation
 
-## 10. Escalation Model
+Approval should be policy-driven.
 
-Agents and executives must not silently guess through important conflicts or insufficient authority.
-
-Typical escalation triggers:
-
-- insufficient authority
-- conflicting canonical sources
-- ambiguous strategic intent
-- architecture conflict
-- low-confidence decision with high impact
-- cost/compute threshold exceeded
-- destructive operation
-- security/privacy policy conflict
-- reviewer rejection
-
-Conceptual path:
+Conceptual levels:
 
 ```text
-Worker
-  ↓ unresolved
-Manager / Role Owner
-  ↓
-Executive
-  ↓
-CEO — Awin
-  ↓ when governance decision required
-Chairman
+L0 Autonomous        — routine read/analyze/non-destructive work
+L1 Manager Approval  — routine changes within delegated scope
+L2 Executive Approval— architecture/cross-domain/high-impact changes
+L3 CEO Approval      — major implementation/company-wide decisions
+L4 Chairman Approval — strategy/governance/destructive/high-risk/high-cost actions
 ```
 
-Example:
+Escalation triggers may include:
 
 ```text
-Canonical design.md conflicts with a new Chairman instruction
-        ↓
-Pick / responsible executive creates Conflict Report
-        ↓
-Awin determines whether policy can resolve it
-        ↓
-Chairman decision if necessary
+insufficient authority
+conflicting canonical sources
+ambiguous strategic intent
+architecture conflict
+low confidence + high impact
+security/privacy concern
+destructive action
+cost/quota threshold
+reviewer rejection
 ```
 
----
-
-## 11. Approval Gates
-
-Not every task should require Chairman approval. Approval should be policy-based.
-
-Suggested conceptual levels:
+Escalation path:
 
 ```text
-L0 — Autonomous
-Read/search/analyze/summarize/non-destructive routine work
-
-L1 — Manager Approval
-Routine artifact updates within delegated scope
-
-L2 — Executive Approval
-Architecture, cross-domain, or higher-impact changes
-
-L3 — CEO Approval
-Major implementation or company-wide operational decisions
-
-L4 — Chairman Approval
-Governance changes, strategic changes, destructive/high-cost/high-risk actions
+Worker → Manager/Role Owner → Executive → CEO Awin → Chairman if required
 ```
 
-These levels are planning concepts and should later be formalized through policy rather than hard-coded assumptions.
-
----
-
-## 12. AI Company Operating Loop
-
-```text
-              CHAIRMAN
-                  │
-                Intent
-                  ▼
-               MISSION
-                  │
-                  ▼
-             CEO — Awin
-                  │
-            Plan / Delegate
-                  ▼
-        ┌──────────────────┐
-        │ Executive Layer  │
-        │ CIO / CTO / ...  │
-        └────────┬─────────┘
-                 │
-              Delegate
-                 ▼
-        ┌──────────────────┐
-        │ Manager / Agent  │
-        │ Specialist Layer │
-        └────────┬─────────┘
-                 │
-              Execute
-                 ▼
-        Runtime / Tools / Systems
-                 │
-                 ▼
-              Evidence
-                 │
-                 ▼
-              Review
-            ┌────┴────┐
-            │         │
-          PASS     PROBLEM
-            │         │
-            │     Escalation
-            │         │
-            └────┬────┘
-                 ▼
-              CEO Awin
-                 │
-          Executive Summary
-                 ▼
-              CHAIRMAN
-```
-
-This operating loop is the current canonical planning direction for AI Company Orchestration.
-
----
-
-## 13. Revised Change Roadmap
-
-The prior roadmap that placed UKS immediately in Change 002 is superseded by the company-orchestration-first sequence below.
+## 11. Canonical roadmap
 
 ### Change 001 — AI Company Organization Foundation
+
+Recommended id:
+
+```text
+001-ai-company-organization-foundation
+```
 
 Scope:
 
@@ -440,18 +287,19 @@ Binding
 Reporting Line
 Authority
 Governance
-Historical binding / audit foundation
+Historical Binding
+Audit Foundation
 ```
 
-Initial canonical bindings:
-
-```text
-Chairman → Owner
-CEO      → Awin
-CIO      → Pick
-```
+Output: a stable company/governance model independent of agents and runtimes.
 
 ### Change 002 — Mission & Company Orchestration
+
+Recommended id:
+
+```text
+002-mission-company-orchestration
+```
 
 Scope:
 
@@ -461,90 +309,126 @@ Workstream
 Task
 Delegation Contract
 Deliverable
-Evidence
+Evidence Package
 Review
 Approval Gate
 Escalation
-Handoff
+Handoff / Resume
 Mission State Machine
+Orchestration audit events
+Completion criteria
 ```
 
-This change defines how the company actually performs work.
+Output: a durable company work lifecycle.
 
 ### Change 003 — Agent Runtime & Execution Fabric
+
+Recommended id:
+
+```text
+003-agent-runtime-execution-fabric
+```
 
 Scope:
 
 ```text
 Role-to-agent resolution
-Runtime binding
-Provider selection
-Runtime fallback
-Quota failover
+Agent/runtime binding
+Provider/model selection
+Capability matching
+Runtime health
+Quota/failure fallback
 Resume/handoff protocol
 Execution state
-Tool/runtime abstraction
+Tool abstraction
 ```
 
-Providers such as Codex, Claude, Gemini, GPT, and local models live here rather than in the organization model.
+Output: resilient execution independent of any single model provider.
 
 ### Change 004 — UKS: Unified Knowledge System
 
-Scope begins the information system managed organizationally by CIO Pick.
-
-Initial areas:
+Recommended id:
 
 ```text
-Knowledge sources
+004-uks-unified-knowledge-system
+```
+
+Organizational owner:
+
+```text
+CIO Position → Pick Identity
+                  │ manages
+                  ▼
+                 UKS
+```
+
+Initial scope:
+
+```text
+Knowledge Source Registry
+Connector Contracts
 GitHub
 Notion
 Google Drive
 NotebookLM
-source/connector contracts
-canonical knowledge representation
-provenance
+Canonical Knowledge Representation
+Provenance
+Catalog / retrieval foundation
 ```
 
-UKS is a company system, not the organizational center of the company.
+UKS is a company system, not the organizational center.
 
 ### Change 005 — Awin CEO Orchestrator
+
+Recommended id:
+
+```text
+005-awin-ceo-orchestrator
+```
 
 Scope:
 
 ```text
 Chairman intent interpretation
-Mission creation
+Mission creation/shaping
 Executive owner selection
 Delegation planning
 Mission monitoring
-Escalation handling
 Cross-executive coordination
+Escalation handling
 Executive synthesis
+Chairman reporting
 ```
+
+Output: Awin behaves as the company's CEO rather than a generic assistant.
 
 ### Change 006 — AI Company Control Center
 
-Potential UI/control-plane scope:
+Recommended id:
+
+```text
+006-ai-company-control-center
+```
+
+Potential scope:
 
 ```text
 Organization chart
 Current bindings
-Missions
+Mission portfolio
 Workstreams/tasks
-Executives/agents
-Runtime status
 Approvals
 Escalations
 Evidence
-Audit
-Cost/quota/status
+Executives/agents
+Runtime health
+Quota/cost/status
+Audit timeline
 ```
 
----
+Output: Chairman-facing control plane for observing and governing the AI Company.
 
-## 14. Architectural Dependency Direction
-
-Preferred dependency order:
+## 12. Dependency direction
 
 ```text
 Organization Foundation
@@ -553,106 +437,114 @@ Mission & Orchestration Contracts
         ↓
 Execution Fabric
         ↓
-Company Systems such as UKS
+Company Systems (UKS, future systems)
         ↓
 CEO Orchestrator
         ↓
-Control Center / UI
+Control Center
 ```
 
-The organization must not depend on UKS implementation details, and UKS should not define company governance.
+Rules:
 
----
+- Organization must not depend on UKS internals.
+- Mission semantics must not depend on a specific AI provider.
+- Runtime fabric must not own company authority.
+- UKS must not redefine governance.
+- Awin CEO logic consumes the contracts established by Changes 001–004.
+- UI observes/controls canonical state; it must not become a second source of truth.
 
-## 15. Example Mission
+## 13. Example mission
 
 Chairman request:
 
 > Design Lesson 3 AI Red Team curriculum.
 
-Possible organizational execution:
+Possible flow:
 
 ```text
 Chairman
    ↓
-Mission: Lesson 3 AI Red Team
+Mission
    ↓
-CEO — Awin
-   ├── delegates information retrieval → CIO Pick / UKS
-   ├── delegates curriculum architecture → appropriate executive/role
-   ├── delegates lab implementation → Builder
-   └── delegates validation → Reviewer / Security role
-            ↓
-       Evidence + Artifacts
-            ↓
-       Review / Escalation
-            ↓
-         CEO — Awin
-            ↓
-      Executive Synthesis
-            ↓
-         Chairman
+CEO Awin
+   ├── information retrieval → CIO Pick / UKS
+   ├── curriculum architecture → appropriate role/executive
+   ├── implementation → Builder
+   └── validation → Reviewer / Security role
+           ↓
+    Artifacts + Evidence
+           ↓
+     Review / Escalation
+           ↓
+        CEO Awin
+           ↓
+  Executive Synthesis
+           ↓
+       Chairman
 ```
 
-The specific worker runtime may change without changing this mission structure.
+The worker runtime may change without altering the organizational Mission structure.
 
----
+## 14. Canonical planning decisions
 
-## 16. Current Accepted Planning Decisions
+1. This is an AI Company operating model.
+2. Chairman operates through goals, decisions, approval, and exceptions.
+3. Awin is initially bound to CEO.
+4. Pick is initially bound to CIO.
+5. UKS is a System managed under CIO scope.
+6. Position, Role, Identity, Agent, Runtime, and System are separate.
+7. Position/identity bindings are temporal and replaceable.
+8. Mission is the durable work unit.
+9. Delegation is explicit and auditable.
+10. Execution returns artifacts and evidence.
+11. Review evaluates acceptance criteria.
+12. Important unresolved issues escalate instead of being guessed through.
+13. Approval is policy-based.
+14. Runtime/provider failover does not redefine organizational responsibility.
+15. Durable artifacts, OpenSpec, Git, tests, and audit state support multi-agent continuation.
+16. UKS begins at Change 004, not Change 002.
+17. Awin's autonomous CEO behavior is layered on top of the foundational contracts rather than hard-coded into them.
 
-1. Awin AI Company is an organizational operating model, not merely an agent framework.
-2. Chairman communicates primarily through goals, decisions, approvals, and exceptions.
-3. Awin is the initially bound CEO identity.
-4. Pick is the initially bound CIO identity.
-5. UKS is a company system managed under the CIO scope, not an identity.
-6. Position, Role, Identity, Agent, Runtime, and System remain separate concepts.
-7. Mission is the preferred durable business/work unit.
-8. Delegation should be explicit and auditable.
-9. Execution should return artifacts and evidence.
-10. Review is independent from execution wherever practical.
-11. Important unresolved conditions should escalate rather than be guessed through.
-12. Approval gates should be policy-driven.
-13. Model/runtime failover must not redefine mission ownership or organizational responsibility.
-14. OpenSpec/Git/test/artifact state should enable multi-agent continuation without relying on chat history.
-15. UKS implementation is deferred until after company orchestration foundations.
-16. Revised roadmap is Change 001 through Change 006 as defined in this document.
+## 15. Immediate next planning work
 
----
-
-## 17. Next Planning Target
-
-The next detailed architecture discussion should focus on **Change 002 — Mission & Company Orchestration**, especially the lifecycle:
+Proceed in order:
 
 ```text
-Create Mission
-   ↓
-Plan
-   ↓
-Delegate
-   ↓
-Execute
-   ↓
-Collect Evidence
-   ↓
-Review
-   ↓
-Approve / Rework / Escalate
-   ↓
-Complete
-   ↓
-Archive / Learn
+1. Design OpenSpec Change 001 in detail.
+2. Validate Organization / Position / Role / Identity / Binding invariants.
+3. Then design Change 002 Mission state machine and Delegation Contract.
+4. Only after those foundations, design runtime execution and UKS implementation.
 ```
 
-Topics to define before implementation include:
+For Change 002, the next detailed discussion should define:
 
-- mission state machine
-- task/workstream hierarchy
-- delegation contract schema
-- evidence package schema
-- approval policy hooks
-- escalation event schema
-- handoff/resume semantics
-- mission completion criteria
-- immutable audit history
+```text
+Mission states
+Workstream/task hierarchy
+Delegation Contract schema
+Evidence Package schema
+Review/rework semantics
+Approval hooks
+Escalation events
+handoff/resume semantics
+completion criteria
+immutable audit history
+```
 
-This should be completed before returning to detailed UKS system architecture.
+## 16. Document precedence
+
+```text
+Accepted OpenSpec / canonical specifications
+        ↓
+Canonical design contracts
+        ↓
+Current implementation + tests
+        ↓
+Accepted architecture decisions
+        ↓
+This integrated roadmap
+        ↓
+Planning discussions / historical notes
+```
+
+Newer accepted specifications may intentionally supersede this roadmap; superseding relationships should be documented explicitly.
