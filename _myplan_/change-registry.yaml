@@ -49,6 +49,10 @@ planning_topics:
       - Executive Cockpit presentation integration
       - Provider-neutral STT/TTS/avatar contracts
       - Reproducible model/bootstrap policy
+      - Adaptive preflight capability detection
+      - Validated runtime profile selection
+      - Automatic safe fallback/degradation
+      - Runtime doctor and smoke tests
       - Degraded text/voice modes
     non_goals:
       - redefining CEO organizational authority
@@ -56,15 +60,18 @@ planning_topics:
       - merging UKS into the avatar runtime
       - assigning OpenSpec Change ID before repository inspection
       - requiring Quark Cloud or opaque one-click packages
+      - blindly installing the highest-performance model without capability checks
+      - arbitrary unvalidated package substitution
     planning_sources:
       - _myplan_/planning-manifest.yaml
       - _myplan_/decisions/2026-09-05_Awin-CEO-Executive-Presence_Planning-Boundary-and-Stack.md
+      - _myplan_/decisions/2026-09-05_Awin-Executive-Presence_Adaptive-Preflight-and-Runtime-Profile-Selection.md
       - _myplan_/discussions/2026-09-05_Awin-CEO-Executive-Presence-Digital-Human_Architecture-Discussion.md
     historical_sources:
       - _myplan_/2026-09-05_Change-003_Awin-CEO-Digital-Human-Executive-Interface_Plan.md
       - _myplan_/2026-09-05_Change-003_No-Quark-Reproducible-Digital-Human-Stack-Research.md
       - _myplan_/2026-09-05_Change-003_Architecture-Amendment_Wav2Lip-Default-and-Reproducible-Bootstrap.md
-    handoff_rule: Antigravity must inspect related Changes, OpenSpec artifacts, AGENTS.md and source tree before mapping this topic into OpenSpec
+    handoff_rule: Antigravity must inspect related Changes, OpenSpec artifacts, AGENTS.md, capability/profile planning, and source tree before mapping this topic into OpenSpec
     feedback: []
 
 changes:
