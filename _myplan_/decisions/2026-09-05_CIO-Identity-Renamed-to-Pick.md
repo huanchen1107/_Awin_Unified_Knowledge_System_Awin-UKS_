@@ -1,49 +1,35 @@
-# Architecture Decision — CIO Identity Renamed from UKS to Pick
+# Architecture Decision — CIO Identity = Pick; UKS Reserved for the System
 
 **Date:** 2026-09-05  
-**Status:** Accepted  
-**Applies to:** Change 001 Organization Foundation and all subsequent planning
+**Status:** Accepted / Canonical
 
 ## Decision
 
-The CIO identity previously named `UKS` is renamed to `Pick`.
-
-The canonical initial organizational binding is now:
+The canonical naming is:
 
 ```text
-Chairman / 董事長 → User / Owner
+Chairman / 董事長 → Owner / User
 CEO / 執行長      → Awin
 CIO / 資訊長      → Pick
+UKS               → Unified Knowledge System
 ```
 
-## Canonical Naming Separation
+`Pick` is the CIO identity. `UKS` is a technical System.
 
-From this decision forward:
-
-```text
-Awin = CEO Identity
-Pick = CIO Identity
-UKS  = Unified Knowledge System
-```
-
-`UKS` is no longer the name of the CIO identity. It is reserved for the information/knowledge system beginning with Change 002.
-
-## Organization Relationship
+## Canonical relationship
 
 ```text
 Chairman
-   │
-   ▼
+   ↓
 CEO — Awin
-   │
-   ▼
+   ↓
 CIO — Pick
-   │
+   │ manages
    ▼
 UKS — Unified Knowledge System
 ```
 
-The relationship remains binding-based rather than hard-coded:
+The company uses binding semantics:
 
 ```text
 Position ── Binding ──> Identity
@@ -53,57 +39,70 @@ Initial bindings:
 
 ```yaml
 bindings:
-  chairman:
-    identity: owner
-  ceo:
-    identity: awin
-  cio:
-    identity: pick
+  chairman: owner
+  ceo: awin
+  cio: pick
 ```
 
-These bindings may change in the future without redefining the positions or organizational workflow.
+These bindings may change later without redefining the positions or workflow.
 
-## Scope Consequence
-
-### Change 001 — Organization Foundation
-
-Change 001 uses:
-
-```text
-Chairman → Owner
-CEO      → Awin
-CIO      → Pick
-```
-
-It remains strictly concerned with Organization, Position, Role, Identity, Binding, Reporting, Delegation, Authority, History, and Audit.
-
-### Change 002 — UKS System Foundation
-
-Change 002 begins design and implementation of:
-
-```text
-UKS = Unified Knowledge System
-```
-
-Pick, as the initially bound CIO identity, is organizationally responsible for UKS, but Pick and UKS are separate domain concepts:
-
-```text
-Identity: Pick
-Position: CIO
-System: UKS
-```
-
-This follows the established invariant:
+## Domain invariant
 
 > **Position ≠ Role ≠ Identity ≠ Agent ≠ Runtime ≠ System**
 
-## Superseding Rule
+Therefore:
 
-Any earlier planning text stating `UKS = CIO`, `CIO — UKS`, or `UKS Identity` should be interpreted as historical discussion and is superseded by this decision.
+```text
+CIO      = Position
+Pick     = Identity
+CIO Agent= Agent
+Claude   = possible Runtime
+UKS      = System
+```
 
-Canonical interpretation after 2026-09-05:
+No model/provider should be hard-coded as Pick's identity.
+
+## Superseded naming
+
+Any older planning text containing these patterns is historical and superseded:
+
+```text
+CIO — UKS
+UKS = CIO Identity
+Identity: UKS
+UKP required only because UKS name is occupied by the CIO
+```
+
+The corrected interpretation is always:
 
 ```text
 CIO — Pick
 UKS — Unified Knowledge System
 ```
+
+## Roadmap consequence
+
+The naming correction also supports the AI Company-first architecture:
+
+```text
+001 AI Company Organization Foundation
+002 Mission & Company Orchestration
+003 Agent Runtime & Execution Fabric
+004 UKS — Unified Knowledge System
+005 Awin CEO Orchestrator
+006 AI Company Control Center
+```
+
+UKS is intentionally implemented later as a company system managed under CIO scope.
+
+## Implementation rule
+
+Future code/config/specs should use stable IDs such as:
+
+```text
+position_id: cio
+identity_id: pick
+system_id: uks
+```
+
+Do not reuse `uks` as an identity identifier.
