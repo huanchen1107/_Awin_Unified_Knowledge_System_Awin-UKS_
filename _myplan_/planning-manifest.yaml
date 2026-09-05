@@ -25,6 +25,7 @@ invariants:
   - OpenSpec changes must record planning provenance
   - Implementation findings return through controlled feedback, not arbitrary reverse edits
   - ChatGPT planning does not directly allocate or create OpenSpec Changes; Antigravity resolves ownership after repository inspection
+  - Executive Presence installation must run capability preflight and select a validated compatible runtime profile before heavy installation or model download
 
 canonical_roadmap:
   path: _myplan_/roadmap/2026-09-05_AI-Company-Orchestration_Integrated-Plan.md
@@ -43,6 +44,9 @@ accepted_decisions:
   - path: _myplan_/decisions/2026-09-05_Awin-CEO-Executive-Presence_Planning-Boundary-and-Stack.md
     status: accepted
     effect: Awin digital human is an Executive Presence presentation layer; no OpenSpec Change ID is preassigned by ChatGPT planning
+  - path: _myplan_/decisions/2026-09-05_Awin-Executive-Presence_Adaptive-Preflight-and-Runtime-Profile-Selection.md
+    status: accepted
+    effect: Executive Presence bootstrap must detect host capabilities first, choose the best validated compatible profile, and use bounded fallbacks instead of blindly installing an incompatible stack
 
 planning_topics:
   awin_ceo_executive_presence:
@@ -59,6 +63,7 @@ planning_topics:
     canonical_sources:
       - _myplan_/discussions/2026-09-05_Awin-CEO-Executive-Presence-Digital-Human_Architecture-Discussion.md
       - _myplan_/decisions/2026-09-05_Awin-CEO-Executive-Presence_Planning-Boundary-and-Stack.md
+      - _myplan_/decisions/2026-09-05_Awin-Executive-Presence_Adaptive-Preflight-and-Runtime-Profile-Selection.md
     historical_sources:
       - _myplan_/2026-09-05_Change-003_Awin-CEO-Digital-Human-Executive-Interface_Plan.md
       - _myplan_/2026-09-05_Change-003_No-Quark-Reproducible-Digital-Human-Stack-Research.md
@@ -66,6 +71,19 @@ planning_topics:
     antigravity_handoff:
       required: true
       rule: inspect AGENTS.md, manifest, registry, roadmap, related OpenSpec artifacts and source tree before assigning ownership or Change ID
+    adaptive_preflight:
+      required: true
+      canonical_decision: _myplan_/decisions/2026-09-05_Awin-Executive-Presence_Adaptive-Preflight-and-Runtime-Profile-Selection.md
+      resolution_order:
+        - compatibility
+        - reliability
+        - realtime_performance
+        - privacy_local_preference
+        - quality
+        - resource_efficiency
+      terminal_fallbacks:
+        - voice_only
+        - text_only
 
 changes:
   "001":
@@ -112,6 +130,7 @@ changes:
       - _myplan_/roadmap/2026-09-05_AI-Company-Orchestration_Integrated-Plan.md
       - _myplan_/decisions/2026-09-05_Awin-CEO-Executive-Presence_Planning-Boundary-and-Stack.md
       - _myplan_/discussions/2026-09-05_Awin-CEO-Executive-Presence-Digital-Human_Architecture-Discussion.md
+      - _myplan_/decisions/2026-09-05_Awin-Executive-Presence_Adaptive-Preflight-and-Runtime-Profile-Selection.md
     related_planning_topics:
       - awin_ceo_executive_presence
     openspec_path: openspec/changes/006-ai-company-control-center
