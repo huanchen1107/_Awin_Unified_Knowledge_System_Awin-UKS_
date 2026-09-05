@@ -1,0 +1,168 @@
+registry_version: 1
+project: awin-ai-company
+updated: 2026-09-05
+
+status_definitions:
+  planning:
+    - idea
+    - discussing
+    - roadmap_defined
+    - ready_for_openspec
+    - superseded
+  openspec:
+    - not_created
+    - proposed
+    - specified
+    - designed
+    - tasked
+    - applying
+    - under_review
+    - completed
+    - archived
+  implementation:
+    - not_started
+    - active
+    - blocked
+    - completed
+    - cancelled
+
+changes:
+  - id: "001"
+    slug: ai-company-organization-foundation
+    title: AI Company Organization Foundation
+    planning_status: ready_for_openspec
+    openspec_status: not_created
+    implementation_status: not_started
+    owner_position: ceo
+    scope:
+      - Organization
+      - Department
+      - Position
+      - Role
+      - Identity
+      - Position-Identity Binding
+      - Reporting Line
+      - Authority
+      - Delegation Boundary
+      - Historical Binding
+      - Organizational Audit Foundation
+    non_goals:
+      - Mission/Workstream/Task execution model
+      - Runtime/provider selection and failover implementation
+      - UKS connectors/retrieval
+      - Awin CEO mission orchestration implementation
+      - Control Center UI
+    deferred_to:
+      "002": Mission and company orchestration
+      "003": Runtime and execution fabric
+      "004": UKS system
+      "005": CEO orchestrator
+      "006": Control center
+    planning_sources:
+      - _myplan_/planning-manifest.yaml
+      - _myplan_/roadmap/2026-09-05_AI-Company-Orchestration_Integrated-Plan.md
+      - _myplan_/2026-09-05_Awin-UKS_Organizational-Governance-and-Role-Binding_Plan.md
+      - _myplan_/2026-09-05_Change-001-002_Scope-Separation.md
+      - _myplan_/decisions/2026-09-05_CIO-Identity-Renamed-to-Pick.md
+      - _myplan_/discussions/2026-09-05_001_Organization-Role-Identity-Binding_Discussion.md
+    openspec_path: openspec/changes/001-ai-company-organization-foundation
+    feedback: []
+
+  - id: "002"
+    slug: mission-company-orchestration
+    title: Mission & Company Orchestration
+    planning_status: roadmap_defined
+    openspec_status: not_created
+    implementation_status: not_started
+    owner_position: ceo
+    scope:
+      - Mission
+      - Workstream
+      - Task
+      - Delegation Contract
+      - Deliverable
+      - Evidence
+      - Review
+      - Approval Gate
+      - Escalation
+      - Handoff
+      - Mission State Machine
+    openspec_path: openspec/changes/002-mission-company-orchestration
+    feedback: []
+
+  - id: "003"
+    slug: agent-runtime-execution-fabric
+    title: Agent Runtime & Execution Fabric
+    planning_status: roadmap_defined
+    openspec_status: not_created
+    implementation_status: not_started
+    owner_position: cto
+    scope:
+      - Role-to-agent resolution
+      - Runtime binding
+      - Provider selection
+      - Runtime fallback
+      - Quota failover
+      - Resume/handoff protocol
+      - Execution state
+      - Tool/runtime abstraction
+    openspec_path: openspec/changes/003-agent-runtime-execution-fabric
+    feedback: []
+
+  - id: "004"
+    slug: unified-knowledge-system
+    title: UKS — Unified Knowledge System
+    planning_status: roadmap_defined
+    openspec_status: not_created
+    implementation_status: not_started
+    owner_position: cio
+    scope:
+      - Knowledge sources
+      - Source/connector contracts
+      - Canonical knowledge representation
+      - Provenance
+      - GitHub
+      - Notion
+      - Google Drive
+      - NotebookLM
+    openspec_path: openspec/changes/004-unified-knowledge-system
+    feedback: []
+
+  - id: "005"
+    slug: awin-ceo-orchestrator
+    title: Awin CEO Orchestrator
+    planning_status: roadmap_defined
+    openspec_status: not_created
+    implementation_status: not_started
+    owner_position: ceo
+    scope:
+      - Chairman intent interpretation
+      - Mission creation
+      - Executive owner selection
+      - Delegation planning
+      - Mission monitoring
+      - Escalation handling
+      - Cross-executive coordination
+      - Executive synthesis
+    openspec_path: openspec/changes/005-awin-ceo-orchestrator
+    feedback: []
+
+  - id: "006"
+    slug: ai-company-control-center
+    title: AI Company Control Center
+    planning_status: roadmap_defined
+    openspec_status: not_created
+    implementation_status: not_started
+    owner_position: ceo
+    scope:
+      - Organization chart
+      - Current bindings
+      - Mission/work status
+      - Runtime status
+      - Approvals
+      - Escalations
+      - Evidence
+      - Audit
+      - Cost/quota/status views
+    openspec_path: openspec/changes/006-ai-company-control-center
+    feedback: []
