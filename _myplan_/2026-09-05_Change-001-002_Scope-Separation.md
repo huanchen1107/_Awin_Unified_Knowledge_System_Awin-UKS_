@@ -1,358 +1,285 @@
-# Awin-UKS Change 001 / Change 002 Scope Separation
+# Change 001 / Change 002 Scope Boundary — AI Company First
 
 **Date:** 2026-09-05  
-**Repository:** `huanchen1107/_Awin_Unified_Knowledge_System_Awin-UKS_`  
-**Status:** Accepted planning decision  
+**Status:** Accepted planning decision, revised to match the canonical AI Company roadmap
 
-## Core Decision
+## Core decision
 
-Change 001 and Change 002 MUST have a strict architectural boundary.
+The previous idea that `Change 002 = UKS System Foundation` is superseded.
 
-- **Change 001 = Organization only**
-- **Change 002 = UKS system begins**
-
-The purpose is to prevent organizational governance from being mixed with knowledge-system implementation.
-
----
-
-# Change 001 — Organizational Foundation
-
-Recommended change name:
+The current canonical sequence is:
 
 ```text
-001-organizational-foundation
+Change 001 = AI Company Organization Foundation
+Change 002 = Mission & Company Orchestration
+Change 003 = Agent Runtime & Execution Fabric
+Change 004 = UKS — Unified Knowledge System
+Change 005 = Awin CEO Orchestrator
+Change 006 = AI Company Control Center
 ```
 
-## Goal
+The reason is architectural: the company must first define **who exists**, then **how work moves through the company**, then **how agents/runtimes execute**, before building a department system such as UKS.
 
-Define the company/organization model, executive structure, roles, identities, bindings, authority, delegation, and auditability.
+## Change 001 — AI Company Organization Foundation
 
-Change 001 establishes **who exists, who reports to whom, who currently occupies each position, and what authority each position has**.
-
-It does **NOT** implement the Unified Knowledge System.
-
-## Initial Organization
+Recommended change id:
 
 ```text
-Chairman / 董事長
-└── current binding: Owner / User
-
-CEO / 執行長
-└── current binding: Awin
-
-CIO / 資訊長
-└── current binding: UKS
+001-ai-company-organization-foundation
 ```
 
-Important principle:
+### Goal
 
-```text
-Position ≠ Role ≠ Identity ≠ Agent ≠ Runtime ≠ System
-```
-
-## Change 001 Scope
-
-Change 001 SHOULD define:
-
-- Organization Registry
-- Position Registry
-- Role Registry
-- Identity Registry
-- Position ↔ Identity Binding
-- Reporting Structure
-- Delegation Policy
-- Authority Policy
-- Binding History
-- Organizational Audit Events
-- Optional Agent Identity metadata
-- Optional Runtime Binding abstraction only if needed to describe identity portability
-
-## Change 001 Must NOT Implement
-
-The following are explicitly out of scope:
-
-- GitHub connector
-- Notion connector
-- Google Drive connector
-- NotebookLM connector
-- document ingestion
-- RAG
-- vector database
-- embeddings
-- hybrid search
-- keyword search
-- metadata extraction from knowledge sources
-- knowledge catalog
-- source authority ranking
-- citation/provenance engine
-- query router for knowledge retrieval
-- NotebookLM research workflow
-- UKS search UI
-- MCP knowledge gateway
-
-These belong to Change 002 or later changes.
-
-## Change 001 Deliverable Concept
-
-After Change 001, the system should be able to answer organizational questions such as:
-
-```text
-Who is the CEO?
-→ Awin
-
-Who is currently bound to CIO?
-→ UKS
-
-Who does CIO report to?
-→ CEO
-
-Can CIO delegate to a subordinate role?
-→ Resolve through delegation policy
-
-Change CEO from Awin to another identity.
-→ Update binding without changing the position definition
-```
-
-But it should NOT yet be able to answer:
-
-```text
-Search my Google Drive.
-Find Change 030 in GitHub.
-Compare Notion and NotebookLM.
-```
-
-Those capabilities begin in Change 002.
-
----
-
-# Change 002 — UKS System Foundation
-
-Recommended change name:
-
-```text
-002-uks-system-foundation
-```
-
-## Goal
-
-Begin implementation of the **Unified Knowledge System (UKS system domain)** managed under the CIO organization responsibility.
-
-Change 002 introduces the technical knowledge-system architecture for unified information access.
-
-## Organizational Relationship
-
-```text
-Chairman
-   ↓
-CEO — Awin
-   ↓
-CIO — UKS
-   ↓
-Unified Knowledge System
-```
-
-Important distinction:
-
-- `CIO` is a **Position**.
-- `UKS` is initially the **Identity bound to CIO**.
-- The Unified Knowledge System is a **System** managed by the CIO domain.
-
-The implementation MUST preserve these distinctions even if display names overlap.
-
-## Change 002 Initial System Scope
-
-Change 002 should start defining:
-
-- UKS system boundary
-- source connector interface
-- knowledge source registry
-- connector lifecycle
-- authentication abstraction
-- sync / live-query strategy
-- document/source identity
-- source metadata normalization
-- provenance baseline
-- project/source classification
-- system-level configuration
-
-Initial target sources:
-
-```text
-GitHub
-Notion
-Google Drive
-NotebookLM
-```
-
-## Recommended Principle
-
-Do not build four independent integrations with four different internal models.
-
-Use one canonical source contract:
-
-```text
-External Source
-     ↓
-Connector Adapter
-     ↓
-Canonical UKS Source / Document Model
-     ↓
-Catalog / Retrieval / Research layers
-```
-
-## Change 002 Should Establish Contracts, Not Everything
-
-Change 002 should establish the **foundation and connector contracts**.
-
-Full search, RAG, ranking, and research orchestration should remain separate changes where practical.
-
----
-
-# Revised Roadmap
-
-## Change 001 — Organizational Foundation
+Define:
 
 ```text
 Organization
-Positions
-Roles
-Identities
-Bindings
-Reporting
-Delegation
+Department
+Position
+Role
+Identity
+Binding
+Reporting Line
 Authority
-History
-Audit
+Governance
+Historical Binding
+Audit Foundation
 ```
 
-No UKS retrieval implementation.
-
-## Change 002 — UKS System Foundation
+Canonical initial bindings:
 
 ```text
-UKS system boundary
-Knowledge source registry
-Connector architecture
+Chairman → Owner
+CEO      → Awin
+CIO      → Pick
+```
+
+Canonical distinction:
+
+> **Position ≠ Role ≠ Identity ≠ Agent ≠ Runtime ≠ System**
+
+### Change 001 answers
+
+```text
+Who is CEO?
+Who is CIO?
+Who reports to whom?
+What authority belongs to a position?
+Who is currently bound to a position?
+How can an identity be replaced without changing the organization?
+What was the historical binding at a given time?
+```
+
+### Explicitly out of scope
+
+```text
+Mission lifecycle
+Task execution
+Delegation Contract lifecycle
+Evidence / Review / Approval / Escalation
+Provider selection and failover implementation
+UKS connectors / retrieval / RAG
+Awin autonomous CEO orchestration
+Company Control Center UI
+```
+
+## Change 002 — Mission & Company Orchestration
+
+Recommended change id:
+
+```text
+002-mission-company-orchestration
+```
+
+### Goal
+
+Define **how the AI Company performs work** after the organization exists.
+
+The durable work unit is a **Mission**, not a chat prompt.
+
+```text
+Chairman Intent
+      ↓
+Mission
+      ↓
+Plan / Decompose
+      ↓
+Assign Owner
+      ↓
+Delegation Contract
+      ↓
+Execute
+      ↓
+Artifacts + Evidence
+      ↓
+Review
+      ↓
+Approve / Rework / Escalate
+      ↓
+Complete
+```
+
+### Change 002 scope
+
+```text
+Mission
+Workstream
+Task
+Delegation Contract
+Deliverable
+Evidence Package
+Review
+Approval Gate
+Escalation
+Handoff
+Resume semantics
+Mission State Machine
+Audit events for orchestration
+Completion criteria
+```
+
+### Change 002 does not implement
+
+```text
+Claude/Codex/Gemini provider selection internals
+Quota failover engine
+UKS connectors/search
+NotebookLM research
+CEO autonomous mission creation from free-form Chairman input
+Full Control Center UI
+```
+
+These are later changes.
+
+## Change 003 — Agent Runtime & Execution Fabric
+
+Purpose:
+
+```text
+Role-to-agent resolution
+Agent runtime binding
+Provider/model selection
+Quota/failure fallback
+Resume/handoff protocol
+Execution state
+Tool abstraction
+Runtime health/capability resolution
+```
+
+The organization and Mission should survive runtime replacement.
+
+## Change 004 — UKS
+
+UKS begins here.
+
+Canonical organizational relationship:
+
+```text
+CIO Position → Pick Identity
+                  │ manages
+                  ▼
+      UKS — Unified Knowledge System
+```
+
+UKS is a **System**, not the CIO identity.
+
+Initial areas may include:
+
+```text
+Knowledge Source Registry
+Connector Contracts
 GitHub
 Notion
 Google Drive
 NotebookLM
-Canonical source/document model
-Provenance baseline
+Canonical Knowledge Representation
+Provenance
+Catalog / retrieval foundations
 ```
 
-## Change 003 — Knowledge Catalog and Index
+## Change 005 — Awin CEO Orchestrator
+
+Awin becomes the active CEO orchestration layer here:
 
 ```text
-Metadata catalog
-Document registry
-Chunking policy
-Keyword index
-Vector index
-Embedding abstraction
-Deduplication
-Version/freshness tracking
+Chairman Intent
+      ↓
+Awin interprets
+      ↓
+Create/shape Mission
+      ↓
+Select executive owner
+      ↓
+Delegate / monitor
+      ↓
+Handle escalation
+      ↓
+Coordinate executives
+      ↓
+Executive synthesis
+      ↓
+Chairman
 ```
 
-## Change 004 — Unified Retrieval and Query Router
+## Change 006 — AI Company Control Center
+
+Potential scope:
 
 ```text
-Intent routing
-Project routing
-Source routing
-Hybrid retrieval
-Authority-aware ranking
-Freshness-aware ranking
-Conflict handling
-Citation assembly
+Organization chart
+Position/identity bindings
+Mission portfolio
+Workstreams/tasks
+Approvals
+Escalations
+Evidence
+Executives/agents
+Runtime status
+Quota/cost/status
+Audit timeline
 ```
 
-## Change 005 — NotebookLM Research Layer
+## Boundary rules
+
+Use these rules when deciding where a feature belongs:
+
+> **Who exists / who has authority / who reports to whom? → Change 001.**
+
+> **How does company work move from intent to completion? → Change 002.**
+
+> **Which agent/model/runtime executes and how does it fail over? → Change 003.**
+
+> **Where is knowledge and how is it represented/retrieved? → Change 004.**
+
+> **How does Awin autonomously behave as CEO? → Change 005.**
+
+> **How does the Chairman observe/control the company? → Change 006.**
+
+## Examples
+
+| Question / feature | Change |
+|---|---:|
+| Who is currently CEO? | 001 |
+| Rebind CIO from Pick to another identity | 001 |
+| Mission state machine | 002 |
+| Delegation Contract | 002 |
+| Review / evidence / escalation | 002 |
+| Codex quota fallback to Claude | 003 |
+| Resume execution on Gemini | 003 |
+| Connect GitHub / Notion / Drive | 004 |
+| Knowledge provenance | 004 |
+| Awin decides which executive owns a new Mission | 005 |
+| Company dashboard | 006 |
+
+## Planning conclusion
 
 ```text
-Deep reading
-Cross-document research
-Research delegation
-Source-backed synthesis
-Notebook lifecycle integration
+001 Build the company structure.
+002 Define how the company works.
+003 Define how AI execution runs reliably.
+004 Build UKS as a company system.
+005 Make Awin operate as CEO.
+006 Give the Chairman a control center.
 ```
 
-NotebookLM should be treated primarily as a research/deep-reader capability, not the canonical knowledge store.
-
-## Change 006 — Awin Executive Orchestration
-
-```text
-Chairman request
-→ CEO Awin
-→ organizational delegation
-→ CIO UKS / future executives
-→ evidence/result package
-→ CEO synthesis
-→ Chairman
-```
-
----
-
-# Boundary Rule
-
-A simple rule should be used when reviewing future proposals:
-
-> **If the feature answers “Who has responsibility or authority?” it belongs to Organization / Change 001.**
-
-> **If the feature answers “Where is the information and how do we retrieve/manage it?” it belongs to UKS / Change 002 or later.**
-
-Examples:
-
-| Question | Change |
-|---|---|
-| Who is CEO? | 001 |
-| Who is bound to CIO? | 001 |
-| Can CEO delegate to CIO? | 001 |
-| Replace Awin as CEO | 001 |
-| Connect GitHub | 002 |
-| Connect Notion | 002 |
-| Connect Google Drive | 002 |
-| Connect NotebookLM | 002 |
-| Build vector search | 003 |
-| Route a query across sources | 004 |
-| Deep research with NotebookLM | 005 |
-| CEO coordinates multiple executives | 006 |
-
----
-
-# Accepted Initial Binding
-
-```yaml
-organization:
-  chairman:
-    position: Chairman
-    current_identity: owner
-
-  ceo:
-    position: CEO
-    current_identity: awin
-
-  cio:
-    position: CIO
-    current_identity: uks
-```
-
-These are **bindings**, not hard-coded equivalences.
-
-Future changes can replace identities without rewriting the organization model.
-
----
-
-# Planning Conclusion
-
-The project should proceed in two distinct phases:
-
-```text
-CHANGE 001
-Build the company first.
-
-CHANGE 002+
-Build the information system operated by the company.
-```
-
-This boundary is the baseline for subsequent OpenSpec proposals and implementation planning.
+This document supersedes the earlier Change 001/002 interpretation that placed UKS directly in Change 002.
