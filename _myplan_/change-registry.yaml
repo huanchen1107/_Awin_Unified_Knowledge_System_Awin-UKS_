@@ -26,6 +26,47 @@ status_definitions:
     - completed
     - cancelled
 
+planning_topics:
+  - id: awin-ceo-executive-presence
+    title: Awin CEO Executive Presence / Digital Human
+    planning_status: roadmap_defined
+    openspec_status: not_created
+    implementation_status: not_started
+    change_id: TBD
+    ownership_resolution: antigravity_required
+    related_changes:
+      - "003"
+      - "005"
+      - "006"
+    scope:
+      - CEO presentation binding
+      - Digital human avatar
+      - Voice profile
+      - Speech input/output
+      - Presence Gateway
+      - Streaming TTS
+      - Barge-in and cancellation
+      - Executive Cockpit presentation integration
+      - Provider-neutral STT/TTS/avatar contracts
+      - Reproducible model/bootstrap policy
+      - Degraded text/voice modes
+    non_goals:
+      - redefining CEO organizational authority
+      - making avatar identity equal to Awin identity
+      - merging UKS into the avatar runtime
+      - assigning OpenSpec Change ID before repository inspection
+      - requiring Quark Cloud or opaque one-click packages
+    planning_sources:
+      - _myplan_/planning-manifest.yaml
+      - _myplan_/decisions/2026-09-05_Awin-CEO-Executive-Presence_Planning-Boundary-and-Stack.md
+      - _myplan_/discussions/2026-09-05_Awin-CEO-Executive-Presence-Digital-Human_Architecture-Discussion.md
+    historical_sources:
+      - _myplan_/2026-09-05_Change-003_Awin-CEO-Digital-Human-Executive-Interface_Plan.md
+      - _myplan_/2026-09-05_Change-003_No-Quark-Reproducible-Digital-Human-Stack-Research.md
+      - _myplan_/2026-09-05_Change-003_Architecture-Amendment_Wav2Lip-Default-and-Reproducible-Bootstrap.md
+    handoff_rule: Antigravity must inspect related Changes, OpenSpec artifacts, AGENTS.md and source tree before mapping this topic into OpenSpec
+    feedback: []
+
 changes:
   - id: "001"
     slug: ai-company-organization-foundation
@@ -106,6 +147,8 @@ changes:
       - Resume/handoff protocol
       - Execution state
       - Tool/runtime abstraction
+    related_planning_topics:
+      - awin-ceo-executive-presence
     openspec_path: openspec/changes/003-agent-runtime-execution-fabric
     feedback: []
 
@@ -144,6 +187,8 @@ changes:
       - Escalation handling
       - Cross-executive coordination
       - Executive synthesis
+    related_planning_topics:
+      - awin-ceo-executive-presence
     openspec_path: openspec/changes/005-awin-ceo-orchestrator
     feedback: []
 
@@ -164,5 +209,7 @@ changes:
       - Evidence
       - Audit
       - Cost/quota/status views
+    related_planning_topics:
+      - awin-ceo-executive-presence
     openspec_path: openspec/changes/006-ai-company-control-center
     feedback: []
