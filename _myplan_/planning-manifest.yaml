@@ -18,12 +18,13 @@ canonical_organization:
       managed_by_position: cio
 
 invariants:
-  - Position != Role != Identity != Agent != Runtime != System
+  - Position != Role != Identity != Agent != Runtime != System != Presentation
   - Mission is the preferred durable business/work unit beginning in Change 002
   - Runtime/provider changes must not redefine organizational identity or ownership
   - Planning history is append/supersede oriented; accepted decisions are not silently rewritten
   - OpenSpec changes must record planning provenance
   - Implementation findings return through controlled feedback, not arbitrary reverse edits
+  - ChatGPT planning does not directly allocate or create OpenSpec Changes; Antigravity resolves ownership after repository inspection
 
 canonical_roadmap:
   path: _myplan_/roadmap/2026-09-05_AI-Company-Orchestration_Integrated-Plan.md
@@ -39,6 +40,32 @@ accepted_decisions:
   - path: _myplan_/decisions/2026-09-05_CIO-Identity-Renamed-to-Pick.md
     status: accepted
     effect: CIO current identity is Pick; UKS is a system, not an identity
+  - path: _myplan_/decisions/2026-09-05_Awin-CEO-Executive-Presence_Planning-Boundary-and-Stack.md
+    status: accepted
+    effect: Awin digital human is an Executive Presence presentation layer; no OpenSpec Change ID is preassigned by ChatGPT planning
+
+planning_topics:
+  awin_ceo_executive_presence:
+    title: Awin CEO Executive Presence / Digital Human
+    status: architecture_defined_pending_antigravity_ownership_resolution
+    change_id: TBD
+    owner_candidate_positions:
+      - ceo
+      - cto
+    related_changes:
+      - "003"
+      - "005"
+      - "006"
+    canonical_sources:
+      - _myplan_/discussions/2026-09-05_Awin-CEO-Executive-Presence-Digital-Human_Architecture-Discussion.md
+      - _myplan_/decisions/2026-09-05_Awin-CEO-Executive-Presence_Planning-Boundary-and-Stack.md
+    historical_sources:
+      - _myplan_/2026-09-05_Change-003_Awin-CEO-Digital-Human-Executive-Interface_Plan.md
+      - _myplan_/2026-09-05_Change-003_No-Quark-Reproducible-Digital-Human-Stack-Research.md
+      - _myplan_/2026-09-05_Change-003_Architecture-Amendment_Wav2Lip-Default-and-Reproducible-Bootstrap.md
+    antigravity_handoff:
+      required: true
+      rule: inspect AGENTS.md, manifest, registry, roadmap, related OpenSpec artifacts and source tree before assigning ownership or Change ID
 
 changes:
   "001":
@@ -74,12 +101,19 @@ changes:
     planning_status: roadmap_defined
     canonical_sources:
       - _myplan_/roadmap/2026-09-05_AI-Company-Orchestration_Integrated-Plan.md
+      - _myplan_/decisions/2026-09-05_Awin-CEO-Executive-Presence_Planning-Boundary-and-Stack.md
+    related_planning_topics:
+      - awin_ceo_executive_presence
     openspec_path: openspec/changes/005-awin-ceo-orchestrator
   "006":
     name: ai-company-control-center
     planning_status: roadmap_defined
     canonical_sources:
       - _myplan_/roadmap/2026-09-05_AI-Company-Orchestration_Integrated-Plan.md
+      - _myplan_/decisions/2026-09-05_Awin-CEO-Executive-Presence_Planning-Boundary-and-Stack.md
+      - _myplan_/discussions/2026-09-05_Awin-CEO-Executive-Presence-Digital-Human_Architecture-Discussion.md
+    related_planning_topics:
+      - awin_ceo_executive_presence
     openspec_path: openspec/changes/006-ai-company-control-center
 
 reverse_flow:
