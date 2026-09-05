@@ -1,0 +1,93 @@
+planning_version: 1
+project: awin-ai-company
+updated: 2026-09-05
+
+canonical_organization:
+  chairman:
+    position: chairman
+    identity: owner
+  ceo:
+    position: ceo
+    identity: awin
+  cio:
+    position: cio
+    identity: pick
+  systems:
+    uks:
+      type: unified_knowledge_system
+      managed_by_position: cio
+
+invariants:
+  - Position != Role != Identity != Agent != Runtime != System
+  - Mission is the preferred durable business/work unit beginning in Change 002
+  - Runtime/provider changes must not redefine organizational identity or ownership
+  - Planning history is append/supersede oriented; accepted decisions are not silently rewritten
+  - OpenSpec changes must record planning provenance
+  - Implementation findings return through controlled feedback, not arbitrary reverse edits
+
+canonical_roadmap:
+  path: _myplan_/roadmap/2026-09-05_AI-Company-Orchestration_Integrated-Plan.md
+  status: canonical
+
+required_indexes:
+  planning_index: _myplan_/README.md
+  change_registry: _myplan_/change-registry.yaml
+  agent_contract: AGENTS.md
+  openspec_config: openspec/config.yaml
+
+accepted_decisions:
+  - path: _myplan_/decisions/2026-09-05_CIO-Identity-Renamed-to-Pick.md
+    status: accepted
+    effect: CIO current identity is Pick; UKS is a system, not an identity
+
+changes:
+  "001":
+    name: ai-company-organization-foundation
+    planning_status: ready_for_openspec
+    canonical_sources:
+      - _myplan_/roadmap/2026-09-05_AI-Company-Orchestration_Integrated-Plan.md
+      - _myplan_/2026-09-05_Awin-UKS_Organizational-Governance-and-Role-Binding_Plan.md
+      - _myplan_/2026-09-05_Change-001-002_Scope-Separation.md
+      - _myplan_/decisions/2026-09-05_CIO-Identity-Renamed-to-Pick.md
+      - _myplan_/discussions/2026-09-05_001_Organization-Role-Identity-Binding_Discussion.md
+    openspec_path: openspec/changes/001-ai-company-organization-foundation
+  "002":
+    name: mission-company-orchestration
+    planning_status: next_detailed_planning
+    canonical_sources:
+      - _myplan_/roadmap/2026-09-05_AI-Company-Orchestration_Integrated-Plan.md
+    openspec_path: openspec/changes/002-mission-company-orchestration
+  "003":
+    name: agent-runtime-execution-fabric
+    planning_status: roadmap_defined
+    canonical_sources:
+      - _myplan_/roadmap/2026-09-05_AI-Company-Orchestration_Integrated-Plan.md
+    openspec_path: openspec/changes/003-agent-runtime-execution-fabric
+  "004":
+    name: unified-knowledge-system
+    planning_status: deferred_until_foundations
+    canonical_sources:
+      - _myplan_/roadmap/2026-09-05_AI-Company-Orchestration_Integrated-Plan.md
+    openspec_path: openspec/changes/004-unified-knowledge-system
+  "005":
+    name: awin-ceo-orchestrator
+    planning_status: roadmap_defined
+    canonical_sources:
+      - _myplan_/roadmap/2026-09-05_AI-Company-Orchestration_Integrated-Plan.md
+    openspec_path: openspec/changes/005-awin-ceo-orchestrator
+  "006":
+    name: ai-company-control-center
+    planning_status: roadmap_defined
+    canonical_sources:
+      - _myplan_/roadmap/2026-09-05_AI-Company-Orchestration_Integrated-Plan.md
+    openspec_path: openspec/changes/006-ai-company-control-center
+
+reverse_flow:
+  directory: _myplan_/feedback
+  allowed_classes:
+    - finding
+    - conflict
+    - risk
+    - proposal
+    - escalation
+  rule: implementation findings do not silently mutate accepted planning decisions
