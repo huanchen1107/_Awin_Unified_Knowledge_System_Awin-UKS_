@@ -1,0 +1,29 @@
+schema: spec-driven
+
+context: |
+  Project: Awin AI Company / Awin-UKS.
+  Canonical organization: Chairman/Owner -> CEO/Awin -> CIO/Pick -> UKS system.
+  Invariant: Position != Role != Identity != Agent != Runtime != System.
+  This repository uses `_myplan_` for Chairman/ChatGPT planning history and accepted planning inputs, and `openspec/` for executable change contracts and canonical specs.
+  Before creating or modifying any OpenSpec change, read `_myplan_/planning-manifest.yaml` and `_myplan_/change-registry.yaml`, then read every required planning source referenced for that change.
+  Record planning provenance in change artifacts. Do not silently contradict accepted decisions or rewrite planning history.
+  New implementation findings/conflicts flow back through `_myplan_/feedback/` and may become a superseding decision before OpenSpec is updated.
+  Completion requires evidence such as tests, commits, artifacts, citations, or review results.
+  Runtime/model providers are replaceable execution layers and must not be encoded as permanent organizational identities or task owners.
+  Current roadmap: 001 Organization Foundation; 002 Mission & Company Orchestration; 003 Agent Runtime & Execution Fabric; 004 UKS; 005 Awin CEO Orchestrator; 006 AI Company Control Center.
+  Primary working language may be Traditional Chinese or English; preserve exact identifiers and paths in English.
+
+rules:
+  proposal:
+    - State the Change ID, scope boundary, non-goals, and planning provenance.
+    - Reference the applicable `_myplan_` manifest/registry sources rather than relying on chat history.
+    - Identify which later Changes own intentionally deferred work.
+  specs:
+    - Write observable normative requirements and scenarios; keep organization, identity, agent, runtime, and system concepts separate.
+    - Do not embed provider-specific behavior unless the capability itself is explicitly provider-specific.
+  design:
+    - Include domain boundaries, canonical IDs, authority/audit implications, failure/handoff behavior, and migration or rollback considerations where relevant.
+    - Explain any divergence from planning sources and link it to an accepted superseding decision or feedback record.
+  tasks:
+    - Tasks belong to logical roles/capabilities, not named LLM providers.
+    - Every completion claim must identify expected evidence or validation.
