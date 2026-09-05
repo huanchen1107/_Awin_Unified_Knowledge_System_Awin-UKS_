@@ -69,6 +69,77 @@ CEO Synthesis
 Chairman
 ```
 
+## OpenSpec planning-governance bridge
+
+This repository deliberately separates planning history from executable change contracts:
+
+```text
+_myplan_                = planning, discussion, decisions, roadmap, feedback
+openspec/               = executable change contracts and canonical specs
+AGENTS.md               = permanent agent behavior / handoff contract
+```
+
+Agents MUST resolve planning before creating or modifying OpenSpec artifacts:
+
+```text
+_myplan_/planning-manifest.yaml
+        ↓
+_myplan_/change-registry.yaml
+        ↓
+Change-specific planning sources
+        ↓
+OpenSpec proposal/specs/design/tasks
+        ↓
+implementation + tests + evidence
+```
+
+Reverse synchronization is controlled rather than automatic rewriting:
+
+```text
+OpenSpec / implementation / review
+        ↓
+new finding / conflict / risk
+        ↓
+_myplan_/feedback/
+        ↓
+accepted new decision if required
+        ↓
+manifest / registry update
+        ↓
+OpenSpec update
+```
+
+Important files:
+
+- `AGENTS.md` — mandatory multi-agent governance and handoff rules.
+- `openspec/config.yaml` — OpenSpec project context injected into artifact generation.
+- `_myplan_/planning-manifest.yaml` — machine-readable canonical planning map.
+- `_myplan_/change-registry.yaml` — Change scopes, statuses, ownership, paths, and planning sources.
+- `_myplan_/feedback/README.md` — controlled reverse-feedback protocol.
+- `docs/OPENSPEC-BOOTSTRAP.md` — reproducible OpenSpec CLI setup for a new machine.
+
+## OpenSpec CLI setup
+
+OpenSpec is installed on each working machine; the package itself is not stored in this Git repository.
+
+After clone, follow `docs/OPENSPEC-BOOTSTRAP.md`.
+
+Typical commands:
+
+```bash
+npm install -g @fission-ai/openspec@latest
+openspec init --tools antigravity,codex,claude,gemini
+```
+
+For an already initialized/upgraded working copy:
+
+```bash
+npm install -g @fission-ai/openspec@latest
+openspec update
+```
+
+Preserve the custom project governance context in `openspec/config.yaml`.
+
 ## Durable execution and handoff
 
 Company state must survive conversation, agent, and runtime changes.
@@ -84,7 +155,7 @@ specs/
 tasks.md
 Git state / commits
 source code
- tests
+tests
 artifacts
 evidence
 audit events
@@ -150,28 +221,40 @@ Organization chart, bindings, missions, tasks, executives, agents, runtime statu
 
 `_myplan_/decisions/` contains accepted architecture decisions.
 
-`_myplan_/discussions/` preserves design rationale and alternatives, but canonical OpenSpec/specification artifacts take precedence once created.
+`_myplan_/discussions/` preserves design rationale and alternatives, while `_myplan_/feedback/` receives implementation findings that may require a new planning decision.
+
+Canonical OpenSpec/specification artifacts take precedence once accepted.
 
 ## Document precedence
 
 ```text
 Accepted OpenSpec / canonical specs
         ↓
-Canonical design contracts
+Canonical OpenSpec design/contracts
         ↓
-Current implementation + tests
+Verified implementation + tests/evidence
         ↓
 Accepted architecture decisions
         ↓
 Current integrated roadmap
         ↓
 Planning discussions / historical notes
+        ↓
+Conversation-only context
 ```
 
 If older text conflicts with the current canonical naming or roadmap, the newer accepted decision/specification wins.
 
 ## Current status
 
-Planning baseline established on **2026-09-05**.
+Planning-governance bridge established on **2026-09-05**.
 
-Next recommended implementation planning target: **Change 001 — AI Company Organization Foundation**, followed by **Change 002 — Mission & Company Orchestration** before detailed UKS implementation.
+Current Change registry state:
+
+```text
+Change 001 — planning_status: ready_for_openspec
+             openspec_status: not_created
+             implementation_status: not_started
+```
+
+Next execution target: create **Change 001 — AI Company Organization Foundation** through the official OpenSpec workflow, using the planning sources declared in the manifest/registry.
