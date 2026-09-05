@@ -26,7 +26,56 @@ Invariant:
 006 — AI Company Control Center
 ```
 
-## What to read first
+## Machine-readable planning bridge
+
+Agents MUST NOT guess which planning documents apply to a Change.
+
+Read these first:
+
+1. `planning-manifest.yaml` — canonical organization, invariants, roadmap, accepted decisions, and Change→source mapping.
+2. `change-registry.yaml` — scope, non-goals, ownership, lifecycle status, OpenSpec path, and feedback references for each Change.
+3. repository root `AGENTS.md` — mandatory agent behavior and handoff rules.
+4. `openspec/config.yaml` — OpenSpec-injected project context and artifact rules.
+
+## Planning → OpenSpec
+
+```text
+Chairman / ChatGPT planning
+        ↓
+_myplan_/ discussions + decisions + roadmap
+        ↓
+planning-manifest.yaml
+        ↓
+change-registry.yaml
+        ↓
+OpenSpec proposal/specs/design/tasks
+        ↓
+implementation + tests + evidence
+```
+
+Before creating or changing an OpenSpec Change, resolve the target Change in the manifest/registry and read its listed planning sources.
+
+## OpenSpec → Planning feedback
+
+Reverse flow is controlled; OpenSpec/implementation does not silently rewrite accepted planning history.
+
+```text
+Implementation / Review
+        ↓
+new finding / conflict / risk
+        ↓
+feedback/
+        ↓
+new governance decision if needed
+        ↓
+manifest / registry update
+        ↓
+OpenSpec update
+```
+
+See `feedback/README.md` for the required feedback record contract.
+
+## What to read first for human review
 
 1. `roadmap/2026-09-05_AI-Company-Orchestration_Integrated-Plan.md` — current integrated planning baseline.
 2. `2026-09-05_Awin-UKS_Organizational-Governance-and-Role-Binding_Plan.md` — Change 001 organization/governance planning input.
@@ -45,21 +94,28 @@ Accepted architecture decisions. These supersede conflicting historical discussi
 ### `discussions/`
 Reasoning, alternatives, and historical context. Useful for understanding *why*, but not the highest-priority specification source.
 
+### `feedback/`
+Implementation/review findings returned to planning. Feedback is not automatically an accepted decision.
+
 ## Precedence
 
 ```text
 Accepted OpenSpec / canonical specs
         ↓
-Canonical design contracts
+Canonical OpenSpec design/contracts
         ↓
-Current implementation + tests
+Verified implementation + tests/evidence
         ↓
 Accepted architecture decisions
         ↓
 Integrated roadmap
         ↓
 Planning discussions / historical notes
+        ↓
+Conversation-only context
 ```
+
+A proposed OpenSpec change may intentionally supersede current canonical specs only through explicit review/archive lifecycle.
 
 ## Important superseded concepts
 
@@ -85,14 +141,10 @@ Change 004 = UKS
 
 ## Current next step
 
-The immediate planning target is:
-
 ```text
 Change 001 — AI Company Organization Foundation
+planning_status: ready_for_openspec
+openspec_status: not_created
 ```
 
-After Change 001 contracts are stable, proceed to:
-
-```text
-Change 002 — Mission & Company Orchestration
-```
+The Change should be created using the installed OpenSpec workflow, with planning provenance from `planning-manifest.yaml` and `change-registry.yaml`.
