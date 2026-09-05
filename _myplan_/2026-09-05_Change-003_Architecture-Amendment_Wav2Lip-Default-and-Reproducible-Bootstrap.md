@@ -1,34 +1,38 @@
-# Change 003 Architecture Amendment — Wav2Lip Default + Reproducible Bootstrap
+# HISTORICAL AMENDMENT — Wav2Lip Default + Reproducible Bootstrap
 
 **Date:** 2026-09-05  
-**Applies to:** `003-awin-ceo-digital-human-executive-interface`
+**Status:** Historical planning input; superseded as a Change-003 amendment  
+**Important:** Canonical Change 003 is `agent-runtime-execution-fabric`.
 
-## Amendment Summary
+Canonical current Avatar / Executive Presence planning:
 
-This amendment updates the initial Change 003 planning based on the more complete Freedidi deployment details and current open-source alternatives.
+- `_myplan_/discussions/2026-09-05_Awin-CEO-Executive-Presence-Digital-Human_Architecture-Discussion.md`
+- `_myplan_/decisions/2026-09-05_Awin-CEO-Executive-Presence_Planning-Boundary-and-Stack.md`
 
-### Revised default avatar profile
+This file preserves the technical amendment that remains useful for Antigravity evaluation.
 
-For a single 24 GB GPU workstation running LLM + STT + TTS + avatar on the same GPU:
+## Technical Amendment Summary
+
+For a single 24 GB GPU workstation running LLM + STT + TTS + avatar on the same GPU, use the following as the first benchmark candidate:
 
 ```yaml
 avatar_engine_profiles:
-  single_gpu_default:
+  single_gpu_default_candidate:
     provider: livetalking
     lip_sync: wav2lip
     rationale: lower_vram_and_realtime_headroom
 
-  high_quality:
+  high_quality_candidate:
     provider: livetalking
     lip_sync: musetalk_1_5
     rationale: better_visual_quality_when_gpu_headroom_exists
 ```
 
-Wav2Lip is therefore no longer treated only as a fallback. It becomes the Phase 1 default for the practical single-GPU profile.
+Wav2Lip is therefore not merely a fallback candidate. It should be benchmarked as the practical first profile for a 24 GB single-GPU target.
 
 ## Bootstrap Policy
 
-The official Awin implementation must be reproducible from GitHub plus approved upstream model/software sources.
+Official Awin implementation should be reproducible from GitHub plus approved upstream model/software sources.
 
 ```yaml
 bootstrap_policy:
@@ -39,7 +43,7 @@ bootstrap_policy:
   checksum_verification: preferred
 ```
 
-Target experience:
+Target operator experience may eventually be:
 
 ```bash
 git clone <awin-repository>
@@ -53,15 +57,15 @@ or equivalent managed container workflow.
 
 ## Runtime vs Setup-Time Tools
 
-Runtime:
+Runtime candidates:
 
 ```text
-Awin Core
+Awin CEO Orchestrator
 Presence Gateway
-LLM Worker
+Runtime Fabric / LLM Worker
 Speech Runtime
 LiveTalking Avatar Worker
-Executive Cockpit
+AI Company Control Center
 UKS integration
 ```
 
@@ -77,7 +81,7 @@ ComfyUI/Wan2.2 must not become required dependencies for everyday Awin startup.
 
 ## Replace Freedidi Glue Scripts
 
-Do not depend on:
+Do not make third-party package scripts architectural dependencies:
 
 ```text
 install-voice.sh
@@ -86,20 +90,9 @@ start-livetalking.sh
 avatar-sync.js
 ```
 
-from a third-party bundle.
-
-Reimplement their responsibilities as first-party Awin components:
-
-```text
-scripts/bootstrap/
-services/speech-runtime/
-services/avatar-worker/
-services/presence-gateway/
-```
+Reimplement the required responsibilities as first-party, provider-neutral components after Antigravity resolves ownership and repository placement.
 
 ## Streaming-First Requirement
-
-The architecture should evolve from whole-response synthesis toward:
 
 ```text
 LLM token stream
@@ -110,25 +103,23 @@ LLM token stream
 → WebRTC
 ```
 
-Chairman interruption must cancel pending LLM/TTS/avatar output quickly and return to listening state.
+Chairman interruption must cancel pending speech/avatar output and return the session to listening state quickly.
 
-## New Acceptance Criteria
+## Evaluation Criteria for Antigravity
 
 1. No mandatory Quark Cloud dependency.
 2. No opaque one-click package dependency.
-3. Official/traceable source recorded for every required model.
-4. Model revision/version can be pinned.
-5. Single-GPU default uses Wav2Lip unless benchmark evidence supports a different choice.
-6. MuseTalk 1.5 remains an optional high-quality profile.
-7. Private voice/avatar training/reference media is excluded from public Git.
-8. `awin doctor` or equivalent validates GPU, ports, models, WebRTC, microphone access, and service health.
-9. Startup does not require manually maintaining three terminal windows.
-10. Text-only degraded mode remains available if digital-human services fail.
-11. ComfyUI/Wan2.2 are avatar-creation tools only.
-12. Streaming and interruption are first-class architectural requirements.
+3. Official/traceable source recorded for required models.
+4. Model revisions can be pinned.
+5. Benchmark Wav2Lip as the 24 GB single-GPU profile.
+6. Benchmark MuseTalk 1.5 as the high-quality profile.
+7. Private voice/avatar reference media is excluded from public Git.
+8. Provide `doctor`-style checks for GPU, ports, models, WebRTC, microphone access and service health.
+9. Avoid a permanent three-terminal startup model.
+10. Preserve text-only degraded mode.
+11. Keep ComfyUI/Wan2.2 as asset-creation tools.
+12. Treat streaming and interruption as protocol requirements.
 
-## Related Research
+## Governance Rule
 
-See:
-
-`_myplan_/2026-09-05_Change-003_No-Quark-Reproducible-Digital-Human-Stack-Research.md`
+This amendment is **planning evidence**, not permission to create an OpenSpec Change. Antigravity must first inspect `AGENTS.md`, `_myplan_/planning-manifest.yaml`, `_myplan_/change-registry.yaml`, related Changes 003/005/006, current OpenSpec artifacts and the source tree, then decide ownership and any future Change ID.
